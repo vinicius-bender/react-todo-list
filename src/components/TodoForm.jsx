@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { addItem } from "../actions/listAction";
+import {useDispatch} from "react-redux";
 
 function TodoForm(props) {
 
     // Cria uma variável de estado chamada "text" inicializada como string vazia
     // "setText" é a função usada para atualizar o valor de "text"
     const [text, setText] = useState("");
+    const dispatch = useDispatch();
 
     //Cada vez que digita no input, essa função salva o valor no estado text.
     function handleChange(event) {
@@ -25,8 +28,9 @@ function TodoForm(props) {
             return;
         }
 
-        props.onAddItems(text);
+        dispatch(addItem(text));
         setText("");
+        props.onHideModal();
     }
 
     return (
